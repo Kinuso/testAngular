@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ArtistService } from '../artistService/artist-service';
 
 
 @Component({
@@ -10,13 +11,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './liste-des-artistes.scss'
 })
 export class ListeDesArtistes {
-  artistes = [
-    {nom: 'Giulia Rossi', image: "/images/artiste2.jpg"},
-    {nom: 'Marco Bianchi', image: "/images/artiste1.jpg"},
-    {nom: 'Elena Ferraro', image: "/images/artiste3.jpg"},
-  ];
 
-  supprimerArtiste(index: number) {
-    this.artistes.splice(index, 1);
+  private artistsService = inject(ArtistService)
+
+    artistes  = this.artistsService.artistes;
+
+      deleteArtist(index: number) {
+        this.artistsService.deleteArtist(index)
   }
 }

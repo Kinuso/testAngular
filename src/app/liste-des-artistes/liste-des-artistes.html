@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-  <meta charset="UTF-8" />
-  <title>Liste des Artistes</title>
+    <meta charset="UTF-8" />
+    <title>Liste des Artistes</title>
 </head>
+
 <body>
     <h1>Liste des artistes</h1>
-        <ul>
-            <li *ngFor="let artiste of artistes; let i = index">
-                <p>{{ artiste.nom }}</p>
-                <img [src]="artiste.image" [alt]="artiste.nom" width="100" />
-                <button style="background: red; color: white;" (click)="supprimerArtiste(i)">Supprimer</button>
-            </li>
-        </ul>
-</body>
-</html>
+    <ul>
+        @for (artiste of artistes; track artiste.id; let i = $index, e = $even) {
+        <li [style.background]="e ? '#f9f9f9' : '#ffffff'">
+            <p>{{ artiste.nom }}</p>
+            <img [src]="artiste.image" [alt]="artiste.nom" width="100" />
+            <button style="background: red; color: white;" (click)="deleteArtist(i)">
+                Supprimer
+            </button>
+        </li>
+        }
 
+    </ul>
+</body>
+
+</html>
