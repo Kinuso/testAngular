@@ -29,7 +29,12 @@ export class ArtistForm {
 
       const formValue = this.artistForm.value;
 
-      this.artistsService.addArtist(formValue.nom ?? "", formValue.image ?? "")
+      const artist = {
+        name: formValue.nom ?? '',
+        photo: formValue.image ?? ''
+      };
+
+      this.artistsService.addArtist(artist)
       this.artistForm.reset();
     }
   }

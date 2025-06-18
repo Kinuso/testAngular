@@ -17,6 +17,6 @@ export class ListeDesArtistes {
     artistes  = this.artistsService.artistes;
 
       deleteArtist(index: number) {
-        this.artistsService.deleteArtist(index)
+        this.artistsService.deleteArtist(index.toString())
   }
 }
