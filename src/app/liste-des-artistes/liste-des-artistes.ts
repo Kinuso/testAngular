@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ArtistService } from '../artistService/artist-service';
+import { ArtistService, ArtistModel } from '../artistService/artist-service';
 
 
 @Component({
@@ -10,13 +10,22 @@ import { ArtistService } from '../artistService/artist-service';
   templateUrl: './liste-des-artistes.html',
   styleUrl: './liste-des-artistes.scss'
 })
-export class ListeDesArtistes {
+export class ListeDesArtistes implements OnInit {
+  private artistsService = inject(ArtistService);
+  artistes: ArtistModel[] = [];
 
-  private artistsService = inject(ArtistService)
+  ngOnInit() {
+    this.artistsService.getArtists().subscribe({
+      next: (data) => {
+        this.artistes = data;
+      },
+      error: (err) => {
+        console.error('Erreur API:', err);
+      }
+    });
+  }
 
-    artistes  = this.artistsService.artistes;
-
-      deleteArtist(index: number) {
-        this.artistsService.deleteArtist(index.toString())
+  deleteArtist(index: number) {
+    // this.artistsService.deleteArtist(index.toString())
   }
 }

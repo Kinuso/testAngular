@@ -1,57 +1,36 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
+
 
 export interface ArtistModel {
   id: string;
-  nom: string;
-  image: string;
+  name: string;
+  photo: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArtistService {
-  
-  private apiUrl = 'https://artists-api-ndhd.onrender.com/artists';
-  private token = 'f3e91f07a577250eb7bda4fccf37adf0';
-  
+
+  constructor() {
+  }
+
+  private apiUrl: string = 'https://artists-api-ndhd.onrender.com/artists';
+  private token: string = 'f3e91f07a577250eb7bda4fccf37adf0';
+
   public artistes: ArtistModel[] = [];
 
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
+  // This service can now make HTTP requests via `this.http`.
 
-  private getHeaders() {
-    return {
-      headers: { 'Authorization': `Bearer ${this.token}` }
-    };
-  }
+  public getArtists(): Observable<any> {
 
-  fetchArtists(): Observable<ArtistModel[]> {
-    return this.http.get<ArtistModel[]>(this.apiUrl, this.getHeaders())
-      .pipe(tap(data => this.artistes = data));
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    });
+    return this.http.get<ArtistModel[]>(this.apiUrl, { headers });
   }
-
-  getArtist(id: string): Observable<ArtistModel> {
-    return this.http.get<ArtistModel>(`${this.apiUrl}/${id}`, this.getHeaders());
-  }
-
-  addArtist(artist: { name: string, photo: string }): Observable<ArtistModel> {
-    return this.http.post<ArtistModel>(this.apiUrl, artist, this.getHeaders())
-      .pipe(tap(newArtist => this.artistes.push(newArtist)));
-  }
-
-  updateArtist(id: string, artist: { name?: string, photo?: string }): Observable<ArtistModel> {
-    return this.http.put<ArtistModel>(`${this.apiUrl}/${id}`, artist, this.getHeaders())
-      .pipe(tap(updated => {
-        const idx = this.artistes.findIndex(a => a.id === id);
-        if (idx !== -1) this.artistes[idx] = updated;
-      }));
-  }
-
-  deleteArtist(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`, this.getHeaders())
-      .pipe(tap(() => {
-        this.artistes = this.artistes.filter(a => a.id !== id);
-      }));
-  }
+  
 }

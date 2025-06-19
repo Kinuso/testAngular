@@ -34,7 +34,7 @@ export class ArtistForm {
         photo: formValue.image ?? ''
       };
 
-      this.artistsService.addArtist(artist)
+      // this.artistsService.addArtist(artist)
       this.artistForm.reset();
     }
   }

@@ -11,8 +11,8 @@
     <ul>
         @for (artiste of artistes; track artiste.id; let i = $index, e = $even) {
         <li [style.background]="e ? '#f9f9f9' : '#ffffff'">
-            <p>{{ artiste.nom }}</p>
-            <img [src]="artiste.image" [alt]="artiste.nom" width="100" />
+            <p>{{ artiste.name }}</p>
+            <img [src]="artiste.photo" [alt]="artiste.name" width="100" />
             <button style="background: red; color: white;" (click)="deleteArtist(i)">
                 Supprimer
             </button>
