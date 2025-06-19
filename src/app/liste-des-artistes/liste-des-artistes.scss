@@ -1,11 +1,53 @@
-button {
-  background-color: #e74c3c;      // rosso vivace
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
-
+.artist-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  background: #fff;
+  
+  .artist-item {
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    &.even {
+      border-left: 4px solid #e0e7ff;
+      
+      &:hover {
+        border-left-color: #b8c0ff;
+      }
+    }
+    
+    button {
+      background: #f0f0f0;
+      color: #666;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: #e0e0e0;
+        color: #444;
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 15px;
+    
+    .artist-item {
+      padding: 15px;
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { ChangeDetectorRef, inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -24,13 +24,26 @@ export class ArtistService {
 
   private http = inject(HttpClient);
   // This service can now make HTTP requests via `this.http`.
-
   public getArtists(): Observable<any> {
-
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.token}`
     });
     return this.http.get<ArtistModel[]>(this.apiUrl, { headers });
   }
   
+  public addArtist(params: { name: string, photo: string }): Observable<ArtistModel> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<ArtistModel>(this.apiUrl, params, { headers });
+  }
+
+  public deleteArtist(id: string): Observable<void> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    });
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.delete<void>(url, { headers });
+  }
 }

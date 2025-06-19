@@ -1,5 +1,17 @@
 <h1>Bienvenue sur l'accueil!</h1>
 <img style="width: 100px" src="/images/fleur.jpg"/>
+
+<button (click)="toggleText()">
+  {{ showText ? 'Cacher' : 'Afficher' }} le texte
+</button>
+
+@if (showText) {
+<p>
+  Test a masquer
+</p>
+}
+  
+
 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad ullam voluptatibus impedit voluptatem incidunt aliquid magnam laboriosam, consequuntur quibusdam similique, sit quasi, repudiandae placeat magni nesciunt et voluptates nemo explicabo.
 Voluptatum blanditiis harum nam numquam? Necessitatibus omnis illo eveniet nulla laudantium dignissimos, tenetur temporibus, cumque a recusandae rem earum dolorem explicabo possimus similique mollitia. Ab incidunt totam odio consectetur ut.
 Officia doloribus quas, rerum labore, reiciendis cum provident consequuntur velit accusamus at maxime doloremque quae, aut repudiandae dolores adipisci. Optio mollitia ipsam sunt enim a earum facere dolores esse voluptas!</p>

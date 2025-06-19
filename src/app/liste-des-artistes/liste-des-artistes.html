@@ -8,17 +8,15 @@
 
 <body>
     <h1>Liste des artistes</h1>
-    <ul>
+    <ul class="artist-list">
         @for (artiste of artistes; track artiste.id; let i = $index, e = $even) {
-        <li [style.background]="e ? '#f9f9f9' : '#ffffff'">
-            <p>{{ artiste.name }}</p>
-            <img [src]="artiste.photo" [alt]="artiste.name" width="100" />
-            <button style="background: red; color: white;" (click)="deleteArtist(i)">
+        <li class="artist-item" [class.even]="e">
+            <app-artist [artist]="artiste" (artistAdded)="onArtistAdded()"></app-artist>
+            <button (click)="deleteArtist(i)">
                 Supprimer
-            </button>
+            </button>   
         </li>
         }
-
     </ul>
 </body>
 

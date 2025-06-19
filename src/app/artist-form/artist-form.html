@@ -1,13 +1,13 @@
 <p class="form-title">Ajout d'un artiste</p>
 
 <form [formGroup]="artistForm" (ngSubmit)="onSubmit()">  <div class="form-group">
-    <label for="artist">Nom :</label>
-    <input id="artist" type="text" formControlName="nom" />
+    <label for="name">Nom :</label>
+    <input id="name" type="text" formControlName="name" />
   </div>
 
   <div class="form-group">
-    <label for="image">Image :</label>
-    <input id="image" type="text" formControlName="image" />
+    <label for="photo">photo :</label>
+    <input id="photo" type="text" formControlName="photo" />
   </div>
 
   <button type="submit" [disabled]="artistForm.invalid">Créer l'artiste</button>
