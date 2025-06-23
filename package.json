@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:projet_festival_musique": "node dist/projet_festival_musique/server/server.mjs"
+    "serve:ssr:projet_festival_musique": "node dist/projet_festival_musique/server/server.mjs",
+    "cy:open": "cypress open"
   },
   "private": true,
   "dependencies": {
