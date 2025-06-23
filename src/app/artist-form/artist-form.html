@@ -11,4 +11,7 @@
   </div>
 
   <button type="submit" [disabled]="artistForm.invalid">Créer l'artiste</button>
+
+  <div *ngIf="infoMessage" data-cy="error-message">{{ infoMessage }}</div>
+
 </form>

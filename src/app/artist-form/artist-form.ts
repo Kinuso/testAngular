@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './artist-form.scss'
 })
 export class ArtistForm {
-  
   @Output() artistAdded = new EventEmitter<void>();
 
   artistForm = new FormGroup({
@@ -19,6 +18,9 @@ export class ArtistForm {
   });
 
   private artistsService = inject(ArtistService);
+
+  // ✅ On ajoute cette ligne
+  public infoMessage: string | null = null;
 
   onSubmit() {
     if (this.artistForm.valid) {
@@ -31,13 +33,13 @@ export class ArtistForm {
         next: (newArtist) => {
           console.log('Nouvel artiste créé :', newArtist);
           this.artistForm.reset();
-          this.artistAdded.emit(); // <-- Émet l'événement
+          this.artistAdded.emit();
+          this.infoMessage = "Artiste ajouté avec succès"; // ✅ Nettoyer l'erreur s'il y en avait une
         },
         error: (err) => {
-          console.error('Erreur lors de l\'ajout :', err);
+          this.infoMessage = err?.error?.message || 'Erreur interne du serveur';
         }
       });
     }
   }
 }
-
